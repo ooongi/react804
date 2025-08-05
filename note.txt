@@ -75,3 +75,4 @@ index.html 원본내용
 public 폴더: index 파일자료
 src 폴더: 작업폴더. 직접적으로 수정하는 곳
 수정할 수 있는 파일들: index.js, App.js, index.css, App.css
+import할 때 css는 확장자까지 제대로 써야 한다.
