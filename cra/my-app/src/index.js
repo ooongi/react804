@@ -26,7 +26,6 @@ root.render(
   // js영역
   <>
     <App />
-    <App />
   </>
 );
 
