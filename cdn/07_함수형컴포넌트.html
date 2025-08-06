@@ -24,20 +24,63 @@
             }
         */
 
+
+        // App 컴포넌트
+        // cdn 방식에서 useState()사용 시 컴포넌트 바깥쪽에서 const로 선언해야함
+        const {useState} = React;
+        // cra 또는 vite 방식으로 하는 경우에는 import {useState} from 'react'; 를 선언해야 함
+        
         function App() {
+            // let mode = 'WELCOME';
+            // const _mode = useState('WELCOME');
+            // console.log('_mode', _mode);
+            // 데이터(값)
+            // console.log('_mode[0]', _mode[0]);
+            // 상태 값 변경 함수
+            // console.log('_mode[1]', _mode[1]);
+
+            // const [값, set함수] = useState('초깃값');
+            // Hook(훅)
+            // 앞에 있는 데이터 변수를 mode라고 했다면, 그 다음 변수 이름은 set을 앞에 붙이는 게 일반적이다.
+            const [mode, setMode] = useState('WELCOME');
+            const [id, setId] = useState(null);
+
             const topics = [
                 { id: 1, title: 'html', body: 'html is ...' },
                 { id: 2, title: 'css', body: 'css is ...' },
                 { id: 3, title: 'javascript', body: 'javascript is ...' }
             ];
+
+            let content = null;
+            // if 제어문
+            if (mode === 'WELCOME') {
+                content = <Article title="welcome" body="Hello, WEB"></Article>
+            } else if (mode === 'READ') {
+                let title, body = null;
+                for(let i=0; i<topics.length; i++) {
+                    if(topics[i].id === id) {
+                        title = topics[i].title;
+                        body = topics[i].body;
+                    }
+                }
+                content = <Article title={title} body={body}></Article>
+            }
+
             return (
                 <div>
                     {/* 리액트의 속성을 props라고 부른다. */}
                     {/* <컴포넌트명 속성=값 /> */}
                     {/* 속성 이름(subject, title, body, ...)은 알아보기 쉽게 짓는 것임 */}
-                    <Header subject="Web"></Header>
-                    <Nav topics={topics} />
-                    <Article title="welcome" body="Hello, WEB" />
+                    <Header subject="Web" onChangeMode={() => {
+                        {/* mode = 'WELCOME'; */}
+                        setMode('WELCOME');
+                    }}></Header>
+                    <Nav topics={topics} onChangeMode={(_id) => {
+                        {/* mode = 'READ'; */}
+                        setMode('READ');
+                        setId(_id);
+                    }} />
+                    {content}
                 </div>
             );
         }
@@ -50,7 +93,10 @@
             return (
                 <header>
                     <h1>
-                        <a href="/">{props.subject}</a>
+                        <a href="/" onClick={() => {
+                            event.preventDefault();
+                            props.onChangeMode();
+                        }}>{props.subject}</a>
                     </h1>
                 </header>
             );
@@ -61,8 +107,10 @@
             const lis = [];
             for (let i = 0; i < props.topics.length; i++) {
                 let t = props.topics[i]; // [{ id: 1, title: 'html', body: 'html is ...' }]
-                lis.push(<li><a href={'/read/'+t.id}>{t.title}</a></li>);
-
+                lis.push(<li key={t.id}><a id={t.id} href={'/read/' + t.id} onClick={() => {
+                    event.preventDefault();
+                    props.onChangeMode(event.target.id); // event.target 이벤트가 발생한 주체=>a태그
+                }}>{t.title}</a></li>);
             }
             return (
                 <nav>
