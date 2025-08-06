@@ -4,33 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>리액트 시작하기</title>
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 
 <body>
+    <!-- CRA(create react app): /public/index.html -->
     <div id="root"></div>
 
     <script type="text/babel">
-        function App() {
-            return (
-                <div className="greeting">
-                    <h1>Hello!</h1>
-                    <p>welcome!</p>
-                </div>
-            );
-        }
-
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(
-            <>
-                <App />
-            </>
+        // CRA: /src/App.js
+        const element = (
+            <div className="greeting">
+                <h1>Hello</h1>
+                <p>Welcome!</p>
+            </div>
         );
-
+        // CRA: /src/index.js
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(element);
     </script>
+
 </body>
 
 </html>

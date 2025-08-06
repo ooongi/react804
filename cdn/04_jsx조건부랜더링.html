@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jsx 조건부 랜더링</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <!-- /index.html -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // /App.js
+
+        const isLoggedIn = false;
+        const isAdmin = false;
+        let element3;
+        
+        // 삼항 연산자 {조건 ? 값1 : 값2}
+        // { isLoggedIn ? <p>환영합니다</p> : <p>로그인하세요</p> }
+        // 논리 연산자 &&(그리고)
+        // 조건1 && 조건 2 && 조건 3...
+        // { isAdmin && <button>관리자 페이지</button> }
+        
+        if (isLoggedIn === true) {
+            element3 = <p>환영합니다</p>
+        } else {
+            element3 = <p>로그인하세요</p>
+        }
+        
+        const element = <div>{ isLoggedIn ? <p>환영합니다</p> : <p>로그인하세요</p> }</div>;
+
+
+
+        // /index.js (랜더링)
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(element);
+    </script>
+
+</body>
+
+</html>

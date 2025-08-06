@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리액트 시작하기</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <!-- CRA(create react app): /public/index.html -->
+    <!-- vite: /index.html -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // CRA: /src/App.js
+        // vite: /src/App.jsx
+        function App() {
+            return (
+                <div className="App">
+                    Hello React!(CRA)
+                </div>
+            );
+        }
+
+        // CRA: /src/index.js
+        // vite: /src/main.jsx
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+
+</body>
+
+</html>

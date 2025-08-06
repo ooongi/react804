@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리액트 함수형 컴포넌트</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <!-- /index.html -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // /App.js
+        /* 
+            function 컴포넌트이름() {
+
+                return (값);
+                값이 하나면 괄호 생략 가능
+            }
+        */
+
+        function App() {
+            const topics = [
+                { id: 1, title: 'html', body: 'html is ...' },
+                { id: 2, title: 'css', body: 'css is ...' },
+                { id: 3, title: 'javascript', body: 'javascript is ...' }
+            ];
+            return (
+                <div>
+                    {/* 리액트의 속성을 props라고 부른다. */}
+                    {/* <컴포넌트명 속성=값 /> */}
+                    {/* 속성 이름(subject, title, body, ...)은 알아보기 쉽게 짓는 것임 */}
+                    <Header subject="Web"></Header>
+                    <Nav topics={topics} />
+                    <Article title="welcome" body="Hello, WEB" />
+                </div>
+            );
+        }
+
+
+        //header
+        function Header(props) {
+            // props는 {subject: "React"}
+            // props.subject는 React
+            return (
+                <header>
+                    <h1>
+                        <a href="/">{props.subject}</a>
+                    </h1>
+                </header>
+            );
+        }
+
+        //nav
+        function Nav(props) {
+            const lis = [];
+            for (let i = 0; i < props.topics.length; i++) {
+                let t = props.topics[i]; // [{ id: 1, title: 'html', body: 'html is ...' }]
+                lis.push(<li><a href={'/read/'+t.id}>{t.title}</a></li>);
+
+            }
+            return (
+                <nav>
+                    <ol>
+                        {lis}
+                    </ol>
+                </nav>
+            );
+        }
+
+        //article
+        function Article(props) {
+            return (
+                <article>
+                    <h2>{props.title}</h2>
+                    {props.body}
+                </article>
+            );
+        }
+
+        // /index.js (랜더링)
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+
+</body>
+
+</html>
