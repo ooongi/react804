@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>리액트 함수형 컴포넌트</title>
+    <title>종합연습</title>
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -23,7 +23,6 @@
                 값이 하나면 괄호 생략 가능
             }
         */
-
 
         // App 컴포넌트
         // cdn 방식에서 useState()사용 시 컴포넌트 바깥쪽에서 const로 선언해야함
@@ -93,8 +92,8 @@
             return (
                 <header>
                     <h1>
-                        <a href="/" onClick={() => {
-                            event.preventDefault();
+                        <a href="/" onClick={(e) => {
+                            e.preventDefault();
                             props.onChangeMode();
                         }}>{props.subject}</a>
                     </h1>
@@ -107,9 +106,9 @@
             const lis = [];
             for (let i = 0; i < props.topics.length; i++) {
                 let t = props.topics[i]; // [{ id: 1, title: 'html', body: 'html is ...' }]
-                lis.push(<li key={t.id}><a id={t.id} href={'/read/' + t.id} onClick={() => {
-                    event.preventDefault();
-                    props.onChangeMode(event.target.id); // event.target 이벤트가 발생한 주체=>a태그
+                lis.push(<li key={t.id}><a id={t.id} href={'/read/' + t.id} onClick={(e) => {
+                    e.preventDefault();
+                    props.onChangeMode(Number(e.target.id)); // event.target 이벤트가 발생한 주체=>a태그
                 }}>{t.title}</a></li>);
             }
             return (
