@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>event</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <!-- /index.html -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // /App.js
+
+        function App() {
+            // js 문법
+            return (
+                <>
+                    <Button />
+                </>
+
+            );
+        }
+
+        // 버튼 컴포넌트
+        const Button = () => {
+            const handleAlert = (event) => {
+                alert('클릭됨!');
+                console.log(event.target);
+            }
+
+            // 이벤트 형식?
+            // on이벤트명={함수명}
+
+            return (
+                <>
+                    <button onClick={handleAlert}>클릭</button>
+                </>
+            );
+        }
+
+        // function Button() {
+        //     return (
+        //         <>
+        //         </>
+        //     );
+        // }
+
+        // /index.js (랜더링)
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+
+</body>
+
+</html>

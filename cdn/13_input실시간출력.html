@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>input에 입력한 정보 실시간 출력</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <!-- /index.html -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+        //cdn useState
+        const {useState} = react;
+
+        // /App.js
+        function App() {
+            return (
+                <>
+                    <RealTimeOutput />
+                </>
+            );
+        }
+
+        function RealTimeOutput() {
+            const [text, setText] = useState('');
+
+            const handleChange = (event) => {
+                setText(event.target.value);}
+
+            return (
+                <div>
+                    <input type="text" value={text} onChange={handleChange} placeholder="입력하세요." />
+                    <p>출력: <strong>{text}</strong></p>
+                </div>
+            );
+        }
+
+
+        // /index.js (랜더링)
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+
+</body>
+
+</html>
