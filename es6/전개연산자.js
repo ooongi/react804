@@ -26,3 +26,14 @@ const o1 = { a: 1, b: 2 };
 const o2 = { b: 3, c: 4 };
 const merged2 = { ...o1, ...o2 };
 console.log(merged2); // { a: 1, b: 3, c: 4 }
+
+// 문자열 분해
+const str = "hello";
+const chars = [...str];
+console.log(chars); // ['h', 'e', 'l', 'l', 'o']
+
+// 함수의 rest 매개변수와는 다름
+function greet(...names) { // ← rest parameter
+  console.log(names);      // ["Alice", "Bob"]
+}
+greet("Alice", "Bob");
